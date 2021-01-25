@@ -1,10 +1,12 @@
 # spring-boot-person-register
 
 # Iniciar aplicação
-docker-compose up -d
+`docker-compose up -d`
 
 # Acesso
-Usuário: `admin`
+http://localhost
+
+Usuário: `admin`  
 Password: `admin`
 
 # Swagger

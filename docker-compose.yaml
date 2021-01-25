@@ -32,6 +32,6 @@ services:
       - .:/srv/run
     expose:
       - "8080"
-    command: "gradle tasks bootRun"
+    command: "gradle bootRun"
     depends_on:
       - mysql

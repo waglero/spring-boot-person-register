@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
         .antMatchers("/source").permitAll()
+        .antMatchers("/swagger-ui").permitAll()
         .and()
         .authorizeRequests().anyRequest().authenticated().and().httpBasic();
     }

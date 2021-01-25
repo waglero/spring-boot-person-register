@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Registro de Pessoas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+</head>
+
+<body>
+  <div class="ui raised container segment">
+    <div id="app" class="">
+      <h1>Registro de Pessoas</h1>
+      <div @click="create" class="ui small primary labeled icon button">
+        <i class="user icon"></i> Adicionar nova pessoa
+      </div>
+      <table class="ui compact celled table">
+        <thead class="full-width">
+          <tr>
+            <th>Nome</th>
+            <th>Sexo</th>
+            <th>E-mail</th>
+            <th>Data de Nascimento</th>
+            <th>Naturalidade</th>
+            <th>Nacionalidade</th>
+            <th>CPF</th>
+            <th>Data de criação</th>
+            <th>Última atualização</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(person, index) in persons" v-bind:key="person.id">
+            <td>{{ person.name }}</td>
+            <td>{{ genders[person.gender] }}</td>
+            <td>{{ person.email }}</td>
+            <td>{{ transformDateToBrFormat(person.birthDate) }}</td>
+            <td>{{ person.placeOfBirth }}</td>
+            <td>{{ person.nationality}}</td>
+            <td>{{ person.cpf }}</td>
+            <td>{{ new Date(person.createdAt).toLocaleString('pt-BR') }}</td>
+            <td>{{ new Date(person.updatedAt).toLocaleString('pt-BR') }}</td>
+            <td width="120">
+              <button @click="edit(index)" class="ui icon button">
+                <i class="edit icon"></i>
+              </button>
+
+              <button @click="deletePerson(person)" class="ui icon button">
+                <i class="trash icon"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="personModal" class="ui tiny modal">
+        <i class="close icon"></i>
+        <div class="header">
+          {{ modalTitle }}
+        </div>
+        <div class="content">
+          <form id="formPerson" class="ui form">
+            <div class="two fields">
+              <div class="field">
+                <label>Nome</label>
+                <input type="text" name="name" v-model="person.name" maxlength="255">
+              </div>
+              <div class="field">
+                <label>E-mail</label>
+                <input type="text" name="email" v-model="person.email" maxlength="255">
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>Sexo</label>
+                <select name="gender" v-model="person.gender">
+                  <option value="F">Feminino</option>
+                  <option value="M">Masculino</option>
+                  <option value="NI">Indefinido</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Data de Nascimento</label>
+                <input class="date" type="text" name="birthDate" v-model="person.birthDate" maxlength="255">
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>Naturalidade</label>
+                <input type="text" name="placeOfBirth" v-model="person.placeOfBirth" maxlength="255">
+              </div>
+              <div class="field">
+                <label>Nacionalidade</label>
+                <input type="text" name="nationality" v-model="person.nationality" maxlength="255">
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>CPF</label>
+                <input class="cpf" type="text" name="cpf" v-model="person.cpf" maxlength="14">
+              </div>
+            </div>
+          </form>
+          <div @click="closeModal('personModal')" class="ui black deny button">
+            Cancelar
+          </div>
+          <div @click="saveAction" class="ui positive right labeled icon button">
+            Salvar
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      </div>
+      <div id="deleteModal" class="ui tiny modal">
+        <i class="close icon"></i>
+        <div class="header">
+          Deletar pessoa
+        </div>
+        <div class="content">
+          <p>Tem certeza que deseja deletar: {{ personToBeDeleted.name }}?</p>
+        </div>
+        <div class="actions">
+          <div class="ui negative button">
+            Não
+          </div>
+          <div @click="deleteAction(personToBeDeleted.id)" class="ui positive right labeled icon button">
+            Sim
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script type="module" src="/main.js"></script>
+
+</body>
+
+</html>

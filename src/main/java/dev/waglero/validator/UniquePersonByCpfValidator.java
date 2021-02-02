@@ -28,7 +28,9 @@ public class UniquePersonByCpfValidator implements ConstraintValidator<UniquePer
             if (person != null && ! person.getId().equals(personFromRequest.getId())) {
                 valid = false;
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.out.println(e.getMessage();
+        }
 
         return valid;
     }

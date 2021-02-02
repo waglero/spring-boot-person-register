@@ -29,7 +29,7 @@ public class UniquePersonByCpfValidator implements ConstraintValidator<UniquePer
                 valid = false;
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage();
+            System.out.println(e.getMessage());
         }
 
         return valid;

@@ -3,7 +3,7 @@
 # Start app
 `docker-compose up -d`
 
-# Location
+# Access
 http://localhost
 
 Usuário: `admin`  

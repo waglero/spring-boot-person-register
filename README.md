@@ -1,9 +1,9 @@
 # spring-boot-person-register
 
-# Iniciar aplicação
+# Start app
 `docker-compose up -d`
 
-# Acesso
+# Location
 http://localhost
 
 Usuário: `admin`  
